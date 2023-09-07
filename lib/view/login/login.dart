@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stock/helpers/app_colors.dart';
 import 'package:stock/widget/bottom.dart';
 
 
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                              const  Color.fromARGB(255, 85, 0, 255)),
+                             AppColors.login),
                             minimumSize: MaterialStateProperty.all<Size>(
                                 const Size(120, 35)),
                             shape: MaterialStateProperty.all<
@@ -90,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: GoogleFonts.acme(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                color: AppColors.card),
                           ),
                         )
                       ],

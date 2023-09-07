@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:stock/screens/Item.dart';
 import 'package:stock/functions/function.dart';
 import 'package:stock/model/stock.dart';
 import 'package:stock/utility/utilities.dart';
+import 'package:stock/view/add/widget_add.dart';
+import 'package:stock/view/item/item.dart';
 
 class Add extends StatefulWidget {
   const Add({Key? key});
@@ -142,35 +143,15 @@ class _AddState extends State<Add> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        buildTextFormField('Item Name', _itemNameController,
-                            TextInputType.text, 'Enter Item Name', null),
+                        text(label: 'Item Name', controller: _itemNameController, keyboardType: TextInputType.text, hintText: 'Enter Item Name', inputFormatters: null),
                         const SizedBox(height: 16),
-                        buildTextFormField(
-                          'Opening Stock',
-                          _openingStockController,
-                          TextInputType.number,
-                          '0',
-                          [FilteringTextInputFormatter.digitsOnly],
-                        ),
+                        text(label: 'Opening Stock', controller: _openingStockController, keyboardType: TextInputType.number, hintText: '0', inputFormatters: [FilteringTextInputFormatter.digitsOnly]),
                         const SizedBox(height: 16),
-                        buildTextFormField('Stall No:', _stallNumberController,
-                            TextInputType.text, 'A2...', null),
+                        text(label: 'Stall No:', controller: _stallNumberController, keyboardType: TextInputType.text, hintText: 'A2...', inputFormatters: null),
                         const SizedBox(height: 16),
-                        buildTextFormField(
-                          'Selling Price',
-                          _sellingPriceController,
-                          TextInputType.number,
-                          '₹',
-                          [FilteringTextInputFormatter.digitsOnly],
-                        ),
+                        text(label: 'Selling Price', controller: _sellingPriceController, keyboardType: TextInputType.number, hintText: '₹', inputFormatters: [FilteringTextInputFormatter.digitsOnly]),
                         const SizedBox(height: 16),
-                        buildTextFormField(
-                          'Cost Price',
-                          _costPriceController,
-                          TextInputType.number,
-                          '₹',
-                          [FilteringTextInputFormatter.digitsOnly],
-                        ),
+                        text(label: 'Cost Price', controller: _costPriceController, keyboardType: TextInputType.number, hintText: '₹', inputFormatters: [FilteringTextInputFormatter.digitsOnly]),
                         Center(
                           child: ElevatedButton(
                               onPressed: () {
@@ -213,32 +194,6 @@ class _AddState extends State<Add> {
         ),
       ),
       backgroundColor: const Color.fromARGB(255, 222, 228, 255),
-    );
-  }
-
-  TextFormField buildTextFormField(
-    String label,
-    TextEditingController controller,
-    TextInputType keyboardType,
-    String hintText,
-    List<TextInputFormatter>? inputFormatters,
-  ) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      inputFormatters: inputFormatters,
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hintText,
-        border: const OutlineInputBorder(),
-      ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Valid Values';
-        }
-
-        return null;
-      },
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stock/helpers/app_colors.dart';
 import 'package:stock/model/stock.dart';
 import '../../../../utility/utilities.dart';
 
@@ -20,7 +21,7 @@ class CustomAlertDialog {
               IconButton(
                 onPressed: () => Navigator.of(ctx).pop(),
                 icon: const Icon(Icons.close),
-                color: const Color.fromARGB(255, 0, 0, 0),
+                color: AppColors.bottom,
               ),
             ],
           ),
@@ -49,7 +50,7 @@ class CustomAlertDialog {
                   IconButton(
                     onPressed: () => stockUtils.decreaseStockQuantities(),
                     icon: const Icon(Icons.remove),
-                    color: const Color.fromARGB(255, 0, 0, 0),
+                    color:AppColors.bottom,
                   ),
                   const SizedBox(width: 10),
                   Expanded(
@@ -70,7 +71,7 @@ class CustomAlertDialog {
                   IconButton(
                     onPressed: () => stockUtils.increaseStockQuantities(),
                     icon: const Icon(Icons.add),
-                    color: const Color.fromARGB(255, 0, 0, 0),
+                    color:AppColors.bottom,
                   ),
                 ],
               ),
@@ -86,11 +87,11 @@ class CustomAlertDialog {
                 Navigator.of(ctx).pop(stock);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 0, 0, 255),
+                backgroundColor: AppColors.login,
               ),
               child: const Text(
                 "OK",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color:AppColors.card),
               ),
             ),
           ],

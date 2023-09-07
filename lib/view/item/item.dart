@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stock/functions/function.dart';
+import 'package:stock/helpers/app_colors.dart';
 import 'package:stock/model/stock.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stock/view/item/detail/detail.dart';
@@ -55,7 +56,7 @@ class Item extends StatelessWidget {
           color: Colors.black,
         ),
         elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 207, 216, 255),
+        backgroundColor:AppColors.appbar,
         title: Text(
           "Items",
           style: GoogleFonts.acme(
@@ -64,7 +65,7 @@ class Item extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 222, 228, 255),
+      backgroundColor:AppColors.bg,
       body: Column(
         children: [
           Padding(
@@ -79,20 +80,20 @@ class Item extends StatelessWidget {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(45),
                     borderSide: const BorderSide(
-                      color: Colors.black,
+                      color:AppColors.bottom,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(45),
                     borderSide: const BorderSide(
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color:AppColors.bottom,
                     ),
                   ),
                   filled: true,
-                  fillColor: const Color.fromARGB(255, 255, 255, 255),
+                  fillColor: AppColors.card,
                   hintText: 'Search Item Name...',
                   prefixIcon: const Icon(Icons.search),
-                  prefixIconColor: const Color.fromARGB(255, 0, 0, 0),
+                  prefixIconColor:AppColors.bottom,
                   suffixIcon: IconButton(
                     onPressed: () {
                       Navigator.pushReplacement(
@@ -157,7 +158,7 @@ class Item extends StatelessWidget {
                               subtitle: Text(
                                 stock.stallNo!,
                                 style: GoogleFonts.acme(
-                                  color: const Color.fromARGB(255, 2, 26, 93),
+                                  color:AppColors.summcard,
                                 ),
                               ),
                               onTap: () {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stock/functions/function.dart';
+import 'package:stock/helpers/app_colors.dart';
 import 'package:stock/model/stock.dart';
 
 class Update extends StatelessWidget {
@@ -22,8 +23,8 @@ class Update extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 207, 216, 255),
-        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor:AppColors.appbar,
+        iconTheme: const IconThemeData(color: AppColors.bottom),
         title: Text(
           'Edit Items',
           style: GoogleFonts.acme(
@@ -38,13 +39,13 @@ class Update extends StatelessWidget {
             },
             child: const Text(
               "SAVE",
-              style: TextStyle(color: Color.fromARGB(255, 0, 42, 255)),
+              style: TextStyle(color:AppColors.login),
             ),
           )
         ],
         elevation: 0,
       ),
-      backgroundColor: const Color.fromARGB(255, 222, 228, 255),
+      backgroundColor: AppColors.bg,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(

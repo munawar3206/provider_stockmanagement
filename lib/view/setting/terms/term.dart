@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stock/helpers/app_colors.dart';
 
 class Term extends StatelessWidget {
   const Term({super.key});
@@ -8,15 +9,15 @@ class Term extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 207, 216, 255),
+        backgroundColor: AppColors.appbar,
         elevation: 0,
         title: Text(
           'Terms & Conditions',
-          style: GoogleFonts.acme(color: Colors.black),
+          style: GoogleFonts.acme(color: AppColors.bottom),
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color:AppColors.bottom),
       ),
-      backgroundColor: const Color.fromARGB(255, 222, 228, 255),
+      backgroundColor: AppColors.bg,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -33,7 +34,7 @@ class Term extends StatelessWidget {
               6.Analyzing Data: Users can analyze inventory data to make informed decisions, such as identifying popular products or detecting slow-moving items.''',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 0, 0, 0))),
+                        color:AppColors.bottom)),
               ),
               const SizedBox(
                 height: 15,
@@ -58,7 +59,7 @@ class Term extends StatelessWidget {
               7. Contact: If you have any questions, concerns, or feedback regarding the App or these Terms and Conditions, please contact us.''',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: Color.fromARGB(255, 0, 0, 0)),
+                      color: AppColors.bottom),
                 ),
               )
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stock/helpers/app_colors.dart';
 
 class About extends StatelessWidget {
   About({super.key});
@@ -8,23 +9,23 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 207, 216, 255),
+        backgroundColor:AppColors.appbar,
         title: Text(
           'About',
           style: GoogleFonts.acme(
-              fontWeight: FontWeight.bold, color: Colors.black),
+              fontWeight: FontWeight.bold, color:AppColors.bottom),
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color:AppColors.bottom),
         elevation: 0,
       ),
-      backgroundColor: const Color.fromARGB(255, 222, 228, 255),
+      backgroundColor:AppColors.bg,
       body: const SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(15.0),
           child: Column(
             children: [
               CircleAvatar(
-                backgroundColor: Colors.white,
+                backgroundColor:AppColors.card,
                 radius: 80,
                 child: Image(
                   image: AssetImage('asset/inventoware-logo1.png'),
@@ -42,7 +43,7 @@ Internship Experience at Bridgeon Solution Kakkanchery,Malappuram:
 During my internship at Bridgeon Solution Kakkanchery, I had the privilege of honing my skills in inventory stock management and gaining hands-on experience in implementing cutting-edge solutions. Working alongside talented mentors and peers, I was exposed to the latest industry practices, which have greatly influenced the development of InventoWare. It was an enriching experience that helped me refine my expertise and passion for revolutionizing inventory management.''',
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      color: Color.fromARGB(255, 0, 0, 0)),
+                      color:AppColors.bottom),
                 ),
               ),
               Padding(
@@ -61,7 +62,7 @@ Feel free to reach out to me through any of these channels. I'm always open to c
 InventoWare is committed to empowering businesses to thrive by offering an all-in-one inventory management solution that saves time, reduces costs, and boosts productivity. Whether you are a small business owner or part of a large enterprise, join the InventoWare community today and experience the seamless and hassle-free way to manage your inventory efficiently. Let's embark on this transformative journey together!''',
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      color: Color.fromARGB(255, 0, 0, 0)),
+                      color: AppColors.bottom),
                 ),
               )
             ],

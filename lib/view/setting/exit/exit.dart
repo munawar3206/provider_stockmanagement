@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:stock/helpers/app_colors.dart';
 
 Future<void> exitDB(
   BuildContext context,
@@ -9,20 +10,20 @@ Future<void> exitDB(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.bottom,
         title: const Text(
           "Confirm Exit",
-          style: TextStyle(color: Color.fromARGB(255, 255, 0, 0)),
+          style: TextStyle(color: AppColors.loss),
         ),
         content: const Text(
           "Are you sure you want to Exit App",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color:AppColors.card),
         ),
         actions: <Widget>[
           TextButton(
             child: const Text(
               "Cancel",
-              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+              style: TextStyle(color: AppColors.card),
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -31,7 +32,7 @@ Future<void> exitDB(
           TextButton(
             child: const Text(
               "Exit",
-              style: TextStyle(color: Color.fromARGB(255, 245, 0, 0)),
+              style: TextStyle(color:AppColors.loss),
             ),
             onPressed: () {
               exit(0);

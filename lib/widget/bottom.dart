@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:stock/Screens/add.dart';
 
-import 'package:stock/Screens/Home.dart';
-import 'package:stock/Screens/Item.dart';
-import 'package:stock/Screens/setting.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
+import 'package:stock/helpers/app_colors.dart';
+import 'package:stock/view/add/add.dart';
+import 'package:stock/view/home/home.dart';
+import 'package:stock/view/item/item.dart';
 import 'package:stock/view/profit/profit.dart';
+import 'package:stock/view/setting/setting.dart';
 
 class Bottom extends StatefulWidget {
   const Bottom({super.key});
@@ -30,7 +31,7 @@ class _BottomState extends State<Bottom> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 222, 228, 255),
+        backgroundColor:AppColors.bg,
         body: bottomBarPages[_currentIndex],
         bottomNavigationBar: FloatingNavbar(
           onTap: (int val) => setState(() => _currentIndex = val),

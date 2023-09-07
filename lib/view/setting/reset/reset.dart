@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:stock/helpers/app_colors.dart';
 
 import 'package:stock/model/stock.dart';
 import 'package:stock/widget/bottom.dart';
@@ -17,17 +18,17 @@ Future<void> resetDB(
         backgroundColor: Colors.black,
         title: const Text(
           "Confirm Reset",
-          style: TextStyle(color: Color.fromARGB(255, 255, 0, 0)),
+          style: TextStyle(color:AppColors.loss),
         ),
         content: const Text(
           "Are you sure you want to reset all settings",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color:AppColors.card),
         ),
         actions: <Widget>[
           TextButton(
             child: const Text(
               "Cancel",
-              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+              style: TextStyle(color:AppColors.card),
             ),
             onPressed: () {
               Navigator.of(context).pop(false);
@@ -36,7 +37,7 @@ Future<void> resetDB(
           TextButton(
             child: const Text(
               "Reset",
-              style: TextStyle(color: Color.fromARGB(255, 245, 0, 0)),
+              style: TextStyle(color:AppColors.loss),
             ),
             onPressed: () {
               Navigator.of(context).pop(true);

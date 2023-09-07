@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
+import 'package:stock/helpers/app_colors.dart';
 
 import 'package:stock/model/stock.dart';
 
@@ -62,7 +63,7 @@ class _ProfitState extends State<Profit> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 207, 216, 255),
+        backgroundColor: AppColors.appbar,
         title: Text(
           "Analyse",
           style: GoogleFonts.acme(
@@ -71,7 +72,7 @@ class _ProfitState extends State<Profit> {
           ),
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 222, 228, 255),
+      backgroundColor:AppColors.bg,
       body: Column(
         children: [
           Expanded(
@@ -100,8 +101,8 @@ class _ProfitState extends State<Profit> {
                               ((openingstock + quantity) * costPrice);
 
                       Color profitColor = itemProfit >= 0
-                          ? const Color.fromARGB(255, 27, 118, 37)
-                          : const Color.fromARGB(255, 255, 17, 0);
+                          ?AppColors.profit
+                          : AppColors.loss;
 
                       return Column(
                         children: [
@@ -123,7 +124,7 @@ class _ProfitState extends State<Profit> {
                             title: Text(
                               stock.itemname!,
                               style: GoogleFonts.acme(
-                                  color: const Color.fromARGB(255, 0, 0, 0)),
+                                  color: AppColors.bottom),
                             ),
                             subtitle: Text(
                               itemProfit >= 0
@@ -133,7 +134,7 @@ class _ProfitState extends State<Profit> {
                                 color: profitColor,
                               ),
                             ),
-                            textColor: const Color.fromARGB(255, 255, 0, 0),
+                            textColor:AppColors.loss,
                             shape: Border.all(),
                           ),
                         ],
