@@ -1,62 +1,36 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:stock/functions/function.dart';
-import 'package:stock/helpers/app_colors.dart';
-import 'package:stock/model/stock.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import 'package:stock/controller/itemprovider.dart';
+import 'package:stock/model/stock.dart';
+// import 'package:stock/provider/item_provider.dart'; // Import the ItemProvider
 import 'package:stock/view/item/detail/detail.dart';
 import 'package:stock/widget/bottom.dart';
 
 class Item extends StatelessWidget {
-  final StockRepository stockRepository = StockRepository();
-  final ValueNotifier<List<Stock>> stocksNotifier = ValueNotifier([]);
-
-  Item({Key? key}) : super(key: key) {
-    loadStocks();
-  }
-
-  List<Stock> loadStocks() {
-    final allStocks = stockRepository.getAllStock();
-    stocksNotifier.value = allStocks;
-
-    return allStocks;
-  }
-
-  Future<void> _deleteStock(int id) async {
-    stockRepository.deleteStock(id);
-    stocksNotifier.value.removeAt(id);
-    stocksNotifier.value = List.from(stocksNotifier.value);
-  }
-
-  List<Stock> filterStocks(List<Stock> stocks, String query) {
-    if (query.isEmpty) {
-      return stocksNotifier.value;
-    } else {
-      return stocks
-          .where((stock) =>
-              stock.itemname!.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    }
-  }
+  const Item({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ItemProvider>(context).loadStocks();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Bottom(),
-                ));
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Bottom(),
+              ),
+            );
           },
           icon: const Icon(Icons.arrow_back),
           color: Colors.black,
         ),
         elevation: 0,
-        backgroundColor:AppColors.appbar,
+        backgroundColor: const Color.fromARGB(255, 207, 216, 255),
         title: Text(
           "Items",
           style: GoogleFonts.acme(
@@ -65,52 +39,53 @@ class Item extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor:AppColors.bg,
+      backgroundColor: const Color.fromARGB(255, 222, 228, 255),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: TextFormField(
               onChanged: (value) {
-                final filteredStocks =
-                    filterStocks(stockRepository.getAllStock(), value);
-                stocksNotifier.value = filteredStocks;
+                Provider.of<ItemProvider>(context, listen: false)
+                    .filterStocks(value); // Use the provider to filter stocks
               },
               decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(45),
-                    borderSide: const BorderSide(
-                      color:AppColors.bottom,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(45),
-                    borderSide: const BorderSide(
-                      color:AppColors.bottom,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: AppColors.card,
-                  hintText: 'Search Item Name...',
-                  prefixIcon: const Icon(Icons.search),
-                  prefixIconColor:AppColors.bottom,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Item(),
-                          ));
-                    },
-                    icon: const Icon(Icons.close),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(45),
+                  borderSide: const BorderSide(
                     color: Colors.black,
-                  )),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(45),
+                  borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+                filled: true,
+                fillColor: const Color.fromARGB(255, 255, 255, 255),
+                hintText: 'Search Item Name...',
+                prefixIcon: const Icon(Icons.search),
+                prefixIconColor: const Color.fromARGB(255, 0, 0, 0),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Item(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.close),
+                  color: Colors.black,
+                ),
+              ),
             ),
           ),
           Expanded(
-            child: ValueListenableBuilder<List<Stock>>(
-              valueListenable: stocksNotifier,
-              builder: (context, stocks, _) {
+            child: Consumer<ItemProvider>(
+              builder: (context, itemProvider, child) {
+                final stocks = itemProvider.stocks;
                 if (stocks.isEmpty) {
                   return Center(
                     child: Column(
@@ -158,7 +133,7 @@ class Item extends StatelessWidget {
                               subtitle: Text(
                                 stock.stallNo!,
                                 style: GoogleFonts.acme(
-                                  color:AppColors.summcard,
+                                  color: const Color.fromARGB(255, 2, 26, 93),
                                 ),
                               ),
                               onTap: () {
@@ -188,7 +163,7 @@ class Item extends StatelessWidget {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              _deleteStock(index);
+                                              itemProvider.deleteStock(index);
                                               Navigator.pop(context);
                                             },
                                             child: const Text('Delete'),
@@ -197,8 +172,7 @@ class Item extends StatelessWidget {
                                       );
                                     },
                                   );
-                                  stocksNotifier.value =
-                                      stockRepository.getAllStock();
+                                  itemProvider.loadStocks();
                                 },
                                 icon: const Icon(Icons.delete),
                               ),

@@ -1,10 +1,13 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stock/model/stock.dart';
-import 'package:stock/view/item/item.dart';
+import 'package:stock/controller/itemprovider.dart';
 
-class HomeController extends ChangeNotifier {
+import 'package:stock/model/stock.dart';
+
+
+class HomeProvider extends ChangeNotifier {
   int totalExpense = 0;
   int totalStockProfit = 0;
   int totalStockLoss = 0;
@@ -12,11 +15,9 @@ class HomeController extends ChangeNotifier {
   final ValueNotifier<List<Stock>> recentlyAddedStocksNotifier =
       ValueNotifier<List<Stock>>([]);
 
-  HomeController() {
+    HomeController() {
     loadRecentlyAddedStocks();
     getUsername();
-    calculateTotalStockProfit();
-    calculateTotalStockLoss();
   }
 
   Future<void> getUsername() async {
@@ -27,17 +28,17 @@ class HomeController extends ChangeNotifier {
   }
 
   Future<void> loadRecentlyAddedStocks() async {
-    Item item = Item();
-    item.loadStocks();
+    final itemProvider = ItemProvider(); // instance of itemprovider
+    itemProvider.loadStocks();
 
     recentlyAddedStocksNotifier.value =
-        item.stocksNotifier.value.take(50).toList();
+        itemProvider.stocksNotifier.value.take(50).toList();
 
     calculateTotalStockProfit();
     calculateTotalStockLoss();
     int expense = 0;
-    for (var stock in item.loadStocks()) {
-      expense += (stock.costPrice! * (stock.openingStock!));
+    for (var stock in itemProvider.stocks) {
+      expense += (stock.costPrice! * (stock.openingStock!)).toInt();
     }
     totalExpense = expense;
     notifyListeners();
@@ -46,12 +47,12 @@ class HomeController extends ChangeNotifier {
   void calculateTotalStockProfit() {
     totalStockProfit = 0;
     for (var stock in recentlyAddedStocksNotifier.value) {
-      final int openingStock = stock.openingStock!;
-      final int sellingPrice = stock.sellingPrice!;
-      final int costPrice = stock.costPrice!;
+      final int? openingStock = stock.openingStock;
+      final int? sellingPrice = stock.sellingPrice;
+      final int? costPrice = stock.costPrice;
       final int quantity = stock.quantity ?? 0;
-      final int itemProfit = (openingStock + quantity) * sellingPrice -
-          ((openingStock + quantity) * costPrice);
+      final int itemProfit = (openingStock! + quantity) * sellingPrice! -
+          ((openingStock + quantity) * costPrice!);
       if (itemProfit >= 0) {
         totalStockProfit += itemProfit;
       }
@@ -62,12 +63,12 @@ class HomeController extends ChangeNotifier {
   void calculateTotalStockLoss() {
     totalStockLoss = 0;
     for (var stock in recentlyAddedStocksNotifier.value) {
-      final int openingStock = stock.openingStock!;
-      final int sellingPrice = stock.sellingPrice!;
-      final int costPrice = stock.costPrice!;
+      final int? openingStock = stock.openingStock;
+      final int? sellingPrice = stock.sellingPrice;
+      final int? costPrice = stock.costPrice;
       final int quantity = stock.quantity ?? 0;
-      final int itemProfit = (openingStock + quantity) * sellingPrice -
-          ((openingStock + quantity) * costPrice);
+      final int itemProfit = (openingStock! + quantity) * sellingPrice! -
+          ((openingStock + quantity) * costPrice!);
       if (itemProfit < 0) {
         totalStockLoss += -itemProfit;
       }

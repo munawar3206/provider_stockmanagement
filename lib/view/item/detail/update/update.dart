@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stock/functions/function.dart';
 import 'package:stock/helpers/app_colors.dart';
 import 'package:stock/model/stock.dart';
+import 'package:stock/view/item/detail/update/widget_update.dart';
 
 class Update extends StatelessWidget {
   final Stock stock;
@@ -14,7 +15,6 @@ class Update extends StatelessWidget {
   final _sellingPriceController = TextEditingController();
   final _costPriceController = TextEditingController();
   final _openingStockController = TextEditingController();
-  // final _soldStockController = TextEditingController();
   final _quantityController = TextEditingController();
 
   @override
@@ -57,20 +57,15 @@ class Update extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildTextFormField('Item Name', _itemNameController,
-                        TextInputType.text, 'Enter Item Name'),
+                    text2(labelText: 'Item Name', controller: _itemNameController, keyboardType: TextInputType.text, hintText: 'Enter Item Name'),
                     const SizedBox(height: 16),
-                    _buildTextFormField('Stall No:', _stallNumberController,
-                        TextInputType.text, 'A2...'),
+                    text2(labelText: 'Stall No:', controller: _stallNumberController, keyboardType: TextInputType.text, hintText: 'A2...'),
                     const SizedBox(height: 16),
-                    _buildTextFormField('Selling Price',
-                        _sellingPriceController, TextInputType.number, '₹'),
+                    text2(labelText: 'Selling Price', controller: _sellingPriceController, keyboardType: TextInputType.number, hintText: '₹'),
                     const SizedBox(height: 16),
-                    _buildTextFormField('Cost Price', _costPriceController,
-                        TextInputType.number, '₹'),
+                    text2(labelText: 'Cost Price', controller: _costPriceController, keyboardType: TextInputType.number, hintText: '₹'),
                     const SizedBox(height: 16),
-                    _buildTextFormField('OpeningStock', _openingStockController,
-                        TextInputType.number, '123....'),
+                    text2(labelText: 'OpeningStock', controller: _openingStockController, keyboardType: TextInputType.number, hintText: '123....'),
                  
                   ],
                 ),
@@ -109,30 +104,4 @@ void _saveChanges(BuildContext context) {
 
   Navigator.pop(context, updatedStock);
 }
-
-
-
-  Widget _buildTextFormField(String labelText, TextEditingController controller,
-      TextInputType keyboardType, String hintText) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          labelText,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        TextFormField(
-          controller: controller,
-          keyboardType: keyboardType,
-          decoration: InputDecoration(
-            border: const UnderlineInputBorder(),
-            hintText: hintText,
-          ),
-        ),
-      ],
-    );
-  }
 }

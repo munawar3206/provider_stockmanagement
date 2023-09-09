@@ -4,6 +4,8 @@ import 'package:stock/model/stock.dart';
 class StockRepository {
   final Box<Stock> _stockBox = Hive.box<Stock>('stockbox');
 
+  static var instance;
+
   List<Stock> getAllStock() {
     return _stockBox.values.toList();
   }

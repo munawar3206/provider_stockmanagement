@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:stock/functions/function.dart';
 import 'package:stock/helpers/app_colors.dart';
 import 'package:stock/model/stock.dart';
 import 'package:stock/view/item/detail/alertbox/alertbox.dart';
-
 import 'package:stock/view/item/detail/graph/piechart.dart';
 import 'package:stock/view/item/detail/update/update.dart';
 

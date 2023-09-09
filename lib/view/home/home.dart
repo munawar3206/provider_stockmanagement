@@ -2,20 +2,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:stock/controller/homecontroller.dart';
+import 'package:stock/controller/homeprovider.dart';
 import 'package:stock/helpers/app_colors.dart';
 import 'package:stock/model/stock.dart';
 import 'package:stock/view/item/detail/detail.dart';
 import 'package:stock/utility/utilities.dart';
 import 'package:provider/provider.dart';
 
-
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
+    Provider.of<HomeProvider>(context).loadRecentlyAddedStocks();
+    return Consumer<HomeProvider>(
       builder: (context, homeController, child) {
         return Scaffold(
           appBar: AppBar(
@@ -86,7 +86,8 @@ class Home extends StatelessWidget {
                                   style: const TextStyle(
                                       fontWeight: FontWeight.w900,
                                       fontSize: 20,
-                                      color: Color.fromARGB(255, 255, 255, 255))),
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255))),
                               const SizedBox(height: 10),
                               Flex(
                                 direction: Axis.horizontal,
@@ -120,7 +121,8 @@ class Home extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     flex: 1,
-                                    child: Text('₹ ${homeController.totalStockProfit}',
+                                    child: Text(
+                                        '₹ ${homeController.totalStockProfit}',
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white)),
@@ -130,7 +132,8 @@ class Home extends StatelessWidget {
                                   ),
                                   Expanded(
                                     flex: 1,
-                                    child: Text('₹ ${homeController.totalStockLoss}',
+                                    child: Text(
+                                        '₹ ${homeController.totalStockLoss}',
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white)),
@@ -194,8 +197,8 @@ class Home extends StatelessWidget {
                                     padding: const EdgeInsets.all(5),
                                     child: Card(
                                       elevation: 10,
-                                      color:
-                                          const Color.fromARGB(255, 255, 255, 255),
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255),
                                       child: ListTile(
                                         leading: Container(
                                           height: 50,
