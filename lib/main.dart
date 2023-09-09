@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:stock/controller/detailprovider.dart';
 import 'package:stock/controller/homeprovider.dart';
 import 'package:stock/controller/itemprovider.dart';
-import 'package:stock/controller/itemprovider.dart';
+import 'package:stock/controller/profitprovider.dart';
 import 'package:stock/model/stock.dart';
 import 'view/login/login.dart';
 
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => ItemProvider()),
           ChangeNotifierProvider<HomeProvider>(
               create: (BuildContext context) => HomeProvider()),
+          ChangeNotifierProvider(create: (context) => ProfitProvider()),
+          // ChangeNotifierProvider(create: (context) => DetailProvider(),)
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,

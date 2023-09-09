@@ -16,12 +16,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<HomeProvider>(context).loadRecentlyAddedStocks();
     return Consumer<HomeProvider>(
-      builder: (context, homeController, child) {
+      builder: (context, homeprovider, child) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 207, 216, 255),
             title: Text(
-              "Hello, ${homeController.username} !",
+              "Hello, ${homeprovider.username} !",
               style: GoogleFonts.acme(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -82,7 +82,7 @@ class Home extends StatelessWidget {
                                     color: AppColors.card),
                               ),
                               const SizedBox(height: 10),
-                              Text('₹ ${homeController.totalExpense}',
+                              Text('₹ ${homeprovider.totalExpense}',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.w900,
                                       fontSize: 20,
@@ -122,7 +122,7 @@ class Home extends StatelessWidget {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                        '₹ ${homeController.totalStockProfit}',
+                                        '₹ ${homeprovider.totalStockProfit}',
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white)),
@@ -133,7 +133,7 @@ class Home extends StatelessWidget {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                        '₹ ${homeController.totalStockLoss}',
+                                        '₹ ${homeprovider.totalStockLoss}',
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white)),
@@ -167,7 +167,7 @@ class Home extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ValueListenableBuilder<List<Stock>>(
-                    valueListenable: homeController.recentlyAddedStocksNotifier,
+                    valueListenable: homeprovider.recentlyAddedStocksNotifier,
                     builder: (context, stocks, _) {
                       return Container(
                         color: const Color.fromARGB(255, 255, 255, 255),

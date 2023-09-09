@@ -5,7 +5,6 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:stock/controller/itemprovider.dart';
 import 'package:stock/model/stock.dart';
-// import 'package:stock/provider/item_provider.dart'; // Import the ItemProvider
 import 'package:stock/view/item/detail/detail.dart';
 import 'package:stock/widget/bottom.dart';
 
@@ -47,7 +46,7 @@ class Item extends StatelessWidget {
             child: TextFormField(
               onChanged: (value) {
                 Provider.of<ItemProvider>(context, listen: false)
-                    .filterStocks(value); // Use the provider to filter stocks
+                    .filterStocks(value); 
               },
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
