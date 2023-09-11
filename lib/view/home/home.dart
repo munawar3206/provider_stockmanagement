@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
               "Hello, ${homeprovider.username} !",
               style: GoogleFonts.acme(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 20,    
                 color: Colors.black,
               ),
             ),

@@ -50,13 +50,7 @@ class StockUtils {
 }
 
 // image
-class ImageUtils {
-  static Future<XFile?> pickImage(ImageSource source) async {
-    final ImagePicker imagePicker = ImagePicker();
-    final picked = await imagePicker.pickImage(source: source);
-    return picked;
-  }
-}
+
 
 // for date now
 String getPresentDate() {

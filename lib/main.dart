@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<HomeProvider>(
               create: (BuildContext context) => HomeProvider()),
           ChangeNotifierProvider(create: (context) => ProfitProvider()),
-          // ChangeNotifierProvider(create: (context) => DetailProvider(),)
+          // ChangeNotifierProvider(create: (context)=> DetailProvider(Stock(itemname: , openingStock: openingStock, stallNo: stallNo, sellingPrice: sellingPrice, costPrice: costPrice)))
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
