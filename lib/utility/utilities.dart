@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 // stock calculation counter
 class StockUtils {
@@ -49,7 +49,6 @@ class StockUtils {
   }
 }
 
-// image
 
 
 // for date now

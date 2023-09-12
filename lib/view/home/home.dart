@@ -21,10 +21,10 @@ class Home extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 207, 216, 255),
             title: Text(
-              "Hello, ${homeprovider.username} !",
+              "Hello, ${homeprovider.username} dvd !",
               style: GoogleFonts.acme(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,    
+                fontSize: 20,
                 color: Colors.black,
               ),
             ),

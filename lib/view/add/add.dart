@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 // import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:stock/controller/addcontroller.dart';
@@ -12,18 +12,6 @@ import 'package:stock/model/stock.dart';
 // import 'package:stock/utility/utilities.dart';
 import 'package:stock/view/add/widget_add.dart';
 import 'package:stock/view/item/item.dart';
-
-class Add extends StatelessWidget {
-  const Add({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AddProvider(),
-      child: AddForm(),
-    );
-  }
-}
 
 class AddForm extends StatelessWidget {
   @override
@@ -130,7 +118,7 @@ class AddForm extends StatelessWidget {
 
                                   addProvider.stockRepository.addStock(newStock);
                                  int totalExpense = int.parse(addProvider.costPriceController.text) *
-    int.parse(addProvider.openingStockController.text);
+                                 int.parse(addProvider.openingStockController.text);
                                   Navigator.pop(context, totalExpense);
                                   Navigator.push(
                                       context,

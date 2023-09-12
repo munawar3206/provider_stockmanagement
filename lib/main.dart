@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:stock/controller/addcontroller.dart';
 import 'package:stock/controller/detailprovider.dart';
 import 'package:stock/controller/homeprovider.dart';
 import 'package:stock/controller/itemprovider.dart';
@@ -27,13 +28,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => ItemProvider()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => ItemProvider()),
           ChangeNotifierProvider<HomeProvider>(
               create: (BuildContext context) => HomeProvider()),
-          ChangeNotifierProvider(create: (context) => ProfitProvider()),
-          // ChangeNotifierProvider(create: (context)=> DetailProvider(Stock(itemname: , openingStock: openingStock, stallNo: stallNo, sellingPrice: sellingPrice, costPrice: costPrice)))
+          ChangeNotifierProvider(
+              create: (BuildContext context) => ProfitProvider()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => AddProvider()),
+          ChangeNotifierProvider(
+            create: (BuildContext context) => DetailProvider(
+              Stock(
+                imagePath: null,
+                itemname: null,
+                stallNo: null,
+                sellingPrice: 0,
+                costPrice: 0,
+                openingStock: 0,
+                quantity: 0,
+              ),
+            ),
+          ),
         ],
-        child: const MaterialApp(
+        child: MaterialApp(
           debugShowCheckedModeBanner: false,
           home: LoginScreen(),
         ));

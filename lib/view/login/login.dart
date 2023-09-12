@@ -9,14 +9,9 @@ import 'package:stock/widget/bottom.dart';
 final _usernameController = TextEditingController();
 String SAVE_KEY_NAME = 'save_key_name';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatelessWidget {
+   LoginScreen({Key? key}) : super(key: key);
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override

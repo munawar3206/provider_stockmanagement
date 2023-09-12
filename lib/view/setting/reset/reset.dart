@@ -3,7 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:stock/helpers/app_colors.dart';
 
 import 'package:stock/model/stock.dart';
-import 'package:stock/widget/bottom.dart';
+import 'package:stock/view/login/login.dart';
+// import 'package:stock/widget/bottom.dart';
 
 //clear from db - reset
 
@@ -18,17 +19,17 @@ Future<void> resetDB(
         backgroundColor: Colors.black,
         title: const Text(
           "Confirm Reset",
-          style: TextStyle(color:AppColors.loss),
+          style: TextStyle(color: AppColors.loss),
         ),
         content: const Text(
           "Are you sure you want to reset all settings",
-          style: TextStyle(color:AppColors.card),
+          style: TextStyle(color: AppColors.card),
         ),
         actions: <Widget>[
           TextButton(
             child: const Text(
               "Cancel",
-              style: TextStyle(color:AppColors.card),
+              style: TextStyle(color: AppColors.card),
             ),
             onPressed: () {
               Navigator.of(context).pop(false);
@@ -37,7 +38,7 @@ Future<void> resetDB(
           TextButton(
             child: const Text(
               "Reset",
-              style: TextStyle(color:AppColors.loss),
+              style: TextStyle(color: AppColors.loss),
             ),
             onPressed: () {
               Navigator.of(context).pop(true);
@@ -55,7 +56,7 @@ Future<void> resetDB(
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const Bottom(),
+          builder: (context) => LoginScreen(),
         ));
   }
 }

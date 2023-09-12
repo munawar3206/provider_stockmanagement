@@ -32,7 +32,7 @@ class HomeProvider extends ChangeNotifier {
     itemProvider.loadStocks();
 
     recentlyAddedStocksNotifier.value =
-        itemProvider.stocksNotifier.value.take(50).toList();
+        itemProvider.stocksNotifier.value.take(4).toList();
 
     calculateTotalStockProfit();
     calculateTotalStockLoss();
