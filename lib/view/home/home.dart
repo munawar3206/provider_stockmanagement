@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stock/controller/detailprovider.dart';
 import 'package:stock/controller/homeprovider.dart';
 import 'package:stock/helpers/app_colors.dart';
 import 'package:stock/model/stock.dart';
@@ -15,23 +17,39 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<HomeProvider>(context).loadRecentlyAddedStocks();
-    return Consumer<HomeProvider>(
-      builder: (context, homeprovider, child) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 207, 216, 255),
-            title: Text(
-              "Hello, ${homeprovider.username} dvd !",
-              style: GoogleFonts.acme(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.black,
-              ),
-            ),
-            elevation: 0,
-            automaticallyImplyLeading: false,
-          ),
-          body: SingleChildScrollView(
+    Provider.of<DetailProvider>(context).stock;
+    Future<String?> getUsername() async {
+      final sharedPref = await SharedPreferences.getInstance();
+      return sharedPref.getString('username');
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 207, 216, 255),
+        title: FutureBuilder<String?>(
+          future: getUsername(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              final username = snapshot.data ?? "";
+              return Text(
+                "Hello, $username !",
+                style: GoogleFonts.acme(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+              );
+            } else {
+              return Container(); 
+            }
+          },
+        ),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+      ),
+      body: Consumer<HomeProvider>(
+        builder: (context, value, child) {
+          return SingleChildScrollView(
             child: Column(
               children: [
                 Padding(
@@ -54,9 +72,10 @@ class Home extends StatelessWidget {
                                   Text(
                                     "Summary",
                                     style: GoogleFonts.acme(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        color: AppColors.card),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: AppColors.card,
+                                    ),
                                   ),
                                   const Spacer(),
                                   const Icon(
@@ -77,12 +96,13 @@ class Home extends StatelessWidget {
                               Text(
                                 "Total Expense",
                                 style: GoogleFonts.acme(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 25,
-                                    color: AppColors.card),
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 25,
+                                  color: AppColors.card,
+                                ),
                               ),
                               const SizedBox(height: 10),
-                              Text('₹ ${homeprovider.totalExpense}',
+                              Text('₹ ${value.totalExpense}',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.w900,
                                       fontSize: 20,
@@ -121,8 +141,7 @@ class Home extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     flex: 1,
-                                    child: Text(
-                                        '₹ ${homeprovider.totalStockProfit}',
+                                    child: Text('₹ ${value.totalStockProfit}',
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white)),
@@ -132,8 +151,7 @@ class Home extends StatelessWidget {
                                   ),
                                   Expanded(
                                     flex: 1,
-                                    child: Text(
-                                        '₹ ${homeprovider.totalStockLoss}',
+                                    child: Text('₹ ${value.totalStockLoss}',
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white)),
@@ -167,7 +185,7 @@ class Home extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ValueListenableBuilder<List<Stock>>(
-                    valueListenable: homeprovider.recentlyAddedStocksNotifier,
+                    valueListenable: value.recentlyAddedStocksNotifier,
                     builder: (context, stocks, _) {
                       return Container(
                         color: const Color.fromARGB(255, 255, 255, 255),
@@ -246,10 +264,10 @@ class Home extends StatelessWidget {
                 )
               ],
             ),
-          ),
-          backgroundColor: AppColors.bg,
-        );
-      },
+          );
+        },
+      ),
+      backgroundColor: AppColors.bg,
     );
   }
 }

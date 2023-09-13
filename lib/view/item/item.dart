@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:stock/controller/detailprovider.dart';
 import 'package:stock/controller/itemprovider.dart';
 import 'package:stock/model/stock.dart';
 import 'package:stock/view/item/detail/detail.dart';
@@ -14,6 +15,7 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<ItemProvider>(context).loadStocks();
+    Provider.of<DetailProvider>(context).stock;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

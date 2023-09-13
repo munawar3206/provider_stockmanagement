@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:provider/provider.dart';
+// import 'package:stock/controller/detailprovider.dart';
 import 'package:stock/functions/function.dart';
 import 'package:stock/helpers/app_colors.dart';
 import 'package:stock/model/stock.dart';
@@ -19,11 +21,12 @@ class Update extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     _initControllers();
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:AppColors.appbar,
+        backgroundColor: AppColors.appbar,
         iconTheme: const IconThemeData(color: AppColors.bottom),
         title: Text(
           'Edit Items',
@@ -39,7 +42,7 @@ class Update extends StatelessWidget {
             },
             child: const Text(
               "SAVE",
-              style: TextStyle(color:AppColors.login),
+              style: TextStyle(color: AppColors.login),
             ),
           )
         ],
@@ -57,16 +60,35 @@ class Update extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    text2(labelText: 'Item Name', controller: _itemNameController, keyboardType: TextInputType.text, hintText: 'Enter Item Name'),
+                    text2(
+                        labelText: 'Item Name',
+                        controller: _itemNameController,
+                        keyboardType: TextInputType.text,
+                        hintText: 'Enter Item Name'),
                     const SizedBox(height: 16),
-                    text2(labelText: 'Stall No:', controller: _stallNumberController, keyboardType: TextInputType.text, hintText: 'A2...'),
+                    text2(
+                        labelText: 'Stall No:',
+                        controller: _stallNumberController,
+                        keyboardType: TextInputType.text,
+                        hintText: 'A2...'),
                     const SizedBox(height: 16),
-                    text2(labelText: 'Selling Price', controller: _sellingPriceController, keyboardType: TextInputType.number, hintText: '₹'),
+                    text2(
+                        labelText: 'Selling Price',
+                        controller: _sellingPriceController,
+                        keyboardType: TextInputType.number,
+                        hintText: '₹'),
                     const SizedBox(height: 16),
-                    text2(labelText: 'Cost Price', controller: _costPriceController, keyboardType: TextInputType.number, hintText: '₹'),
+                    text2(
+                        labelText: 'Cost Price',
+                        controller: _costPriceController,
+                        keyboardType: TextInputType.number,
+                        hintText: '₹'),
                     const SizedBox(height: 16),
-                    text2(labelText: 'OpeningStock', controller: _openingStockController, keyboardType: TextInputType.number, hintText: '123....'),
-                 
+                    text2(
+                        labelText: 'OpeningStock',
+                        controller: _openingStockController,
+                        keyboardType: TextInputType.number,
+                        hintText: '123....'),
                   ],
                 ),
               ),
@@ -79,29 +101,29 @@ class Update extends StatelessWidget {
 
   /*updating */
   void _initControllers() {
-  _itemNameController.text = stock.itemname!;
-  _stallNumberController.text = stock.stallNo!;
-  _sellingPriceController.text = stock.sellingPrice.toString();
-  _costPriceController.text = stock.costPrice.toString();
-  _openingStockController.text = stock.openingStock.toString();
-  
-  _quantityController.text = stock.quantity.toString();
-}
+    _itemNameController.text = stock.itemname!;
+    _stallNumberController.text = stock.stallNo!;
+    _sellingPriceController.text = stock.sellingPrice.toString();
+    _costPriceController.text = stock.costPrice.toString();
+    _openingStockController.text = stock.openingStock.toString();
 
-void _saveChanges(BuildContext context) {
-  Stock updatedStock = Stock(
-    id: stock.id,
-    imagePath: stock.imagePath,
-    itemname: _itemNameController.text,
-    stallNo: _stallNumberController.text,
-    sellingPrice: int.tryParse(_sellingPriceController.text) ?? 0,
-    costPrice: int.tryParse(_costPriceController.text) ?? 0,
-    openingStock: int.tryParse(_openingStockController.text) ?? 0,
-    quantity: int.tryParse(_quantityController.text) ?? 0,
-  );
+    _quantityController.text = stock.quantity.toString();
+  }
 
-  stockRepository.updateStock(updatedStock);
+  void _saveChanges(BuildContext context) {
+    Stock updatedStock = Stock(
+      id: stock.id,
+      imagePath: stock.imagePath,
+      itemname: _itemNameController.text,
+      stallNo: _stallNumberController.text,
+      sellingPrice: int.tryParse(_sellingPriceController.text) ?? 0,
+      costPrice: int.tryParse(_costPriceController.text) ?? 0,
+      openingStock: int.tryParse(_openingStockController.text) ?? 0,
+      quantity: int.tryParse(_quantityController.text) ?? 0,
+    );
 
-  Navigator.pop(context, updatedStock);
-}
+    stockRepository.updateStock(updatedStock);
+
+    Navigator.pop(context, updatedStock);
+  }
 }
